@@ -1,0 +1,13 @@
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circular outline -->
+  <circle cx="120" cy="120" r="115" fill="none" stroke="#FF3B3F" stroke-width="3"></circle>
+
+  <!-- Abstract pin/home icon -->
+  <path d="M120 60C96 60 80 78 80 100C80 125 120 180 120 180C120 180 160 125 160 100C160 78 144 60 120 60Z" fill="#FF3B3F"></path>
+  <circle cx="120" cy="100" r="12" fill="#FFFFFF"></circle>
+
+  <!-- App name -->
+  <text x="120" y="210" font-family="Orbitron, Arial, sans-serif" font-size="22" fill="#FF3B3F" text-anchor="middle" letter-spacing="2">
+    AirBNC
+  </text>
+</svg>
