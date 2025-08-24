@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 #root{
     width: 100vw;
@@ -117,15 +117,16 @@ p{
     height: 30px;
 }
 
-section.filter .filter-button {
-    position: absolute !important;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, -150%);
-  }
+.filter-price-range{
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
 
-.filter-price-range .filter-amenities{
-    font-family: "Comfortaa", sans-serif;
+.filter-amenities{
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
 }
@@ -137,4 +138,50 @@ section.filter .filter-button {
     grid-template-columns: repeat(auto-fit, 100px);
     padding: 5px;
     width: 100%;
+}
+
+.control{
+    display: flex;
+    gap: 1rem; 
+}
+
+.control-item {
+    display: flex;
+    flex-direction: column-reverse; 
+    align-items: flex-start; 
+}
+
+.control-container-input {
+    width: 100px; 
+    padding: 6px 10px;
+    box-shadow: inset 1px 1px 3px #ccc;
+    border-radius: 5px;
+    
+}
+
+
+.control-container {
+    margin-top: 4px;
+    font-size: 14px;
+    color: #555;
+}
+
+
+.filter-buttons {
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    margin-right: 50px;
+    font-family: "Roboto Mono", monospace;
+    font-size: 15px;
+}
+
+.clear-filter-button {
+    border-color: #A9C2E7;
+}
+
+.apply-filter-button {
+    background-color: #A9C2E7;
 }

@@ -10,6 +10,7 @@ export default function Filters ({setSearchParams, setSortOrder}){
    const [maxPriceChange, setMaxPriceChange] = useState(500)
    const [openModal, setOpenModal] = useState(false)
    const [amenities, setAmenities] = useState([])
+   const [clear, setClear] = useState('')
 
     const applyFilter = () => {
         const newParams = new URLSearchParams()
@@ -22,6 +23,8 @@ export default function Filters ({setSearchParams, setSortOrder}){
         setshowSort((currentShowSort) => {return !currentShowSort})
         setShowFilter(false)
     }
+
+  
 
     useEffect(()=>{
         axios
@@ -58,11 +61,17 @@ export default function Filters ({setSearchParams, setSortOrder}){
                         <input id="toSlider" type="range" value={maxPriceChange} min="0" max="500" onChange={(e)=>setMaxPriceChange(e.target.value)}/>
                     </div>
                     <div className="control">
+                        <div className="control-item">
                             <label htmlFor="fromInput" className="control-container">Min</label>
                             <input className="control-container-input" value={minPriceChange} type="number" id="fromInput" min="0" max="500" onChange={(e)=>setMinPriceChange(e.target.value)}/>
+                            
+                        </div>
+                        <div className="control-item">
                             <label htmlFor="toInput" className="control-container">Max</label>
                             <input className="control-container-input" value={maxPriceChange} type="number" id="toInput" min="0" max="500" onChange={(e)=>setMaxPriceChange(e.target.value)}/>
+                        </div>
                     </div>
+                            
                     
                     <p className="filter-amenities">Amenities</p>
                     <ul className="list-amenities">
@@ -70,14 +79,23 @@ export default function Filters ({setSearchParams, setSortOrder}){
                             return (<li key={amenity_slug.amenity}>{amenity_slug.amenity}</li>)
                         })}
                     </ul>
-                    <Button
-                        className="filter-button"
-                        variant="contained"
-                        color="primary"
-                        onClick={applyFilter}
-                        >
-                        Filter
-                    </Button>
+
+                
+                    <footer className="filter-buttons">
+                        <button
+                            className="clear-filter-button"
+                            >
+                            CLEAR ALL
+                        </button>
+                        <button
+                            className="apply-filter-button"
+                            variant="contained"
+                            color="primary"
+                            onClick={applyFilter}
+                            >
+                            FILTER
+                        </button>
+                    </footer>
                 </section>
             </Modal>
         </>
