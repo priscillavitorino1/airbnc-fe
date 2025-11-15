@@ -1,39 +1,45 @@
-import {useEffect, useState} from "react"
+import {useState} from "react"
 import { ButtonGroup, Button } from '@mui/material'
 import './rangeSlider.css'
 import Modal from "./Modal"
-import axios from 'axios'
+import Amenities from "./Amenities"
 
 export default function Filters ({setSearchParams, setSortOrder}){
    const [showSort, setshowSort] = useState(false)
    const [minPriceChange, setMinPriceChange] = useState(0)
    const [maxPriceChange, setMaxPriceChange] = useState(500)
+   const [selectedAmenities, setSelectedAmenities] = useState([])
    const [openModal, setOpenModal] = useState(false)
-   const [amenities, setAmenities] = useState([])
-   const [clear, setClear] = useState('')
+   //const [clear, setClear] = useState('')
 
     const applyFilter = () => {
         const newParams = new URLSearchParams()
         newParams.set('minPrice', minPriceChange)
         newParams.set('maxPrice', maxPriceChange)
+        newParams.set('amenity', selectedAmenities)
         setSearchParams(newParams)
     }
 
+    const handleAmenitiesChange = (amenities) => {
+        setSelectedAmenities(amenities)
+    }
+
+     const clearFilter = () => {
+        setMinPriceChange(0)
+        setMaxPriceChange(500)
+        const newParams = new URLSearchParams()
+        newParams.delete('minPrice')
+        newParams.delete('maxPrice')
+        setSearchParams(newParams)
+    }
+
+
     const toggleSort = () => {
         setshowSort((currentShowSort) => {return !currentShowSort})
-        setShowFilter(false)
+        //setShowFilter(false)
     }
 
   
-
-    useEffect(()=>{
-        axios
-            .get('https://airbnc-q89r.onrender.com/api/amenities')
-            .then(({data})=>{
-                setAmenities(data.amenities)
-            })
-    },[])
-
     return (
         <>
             <div className="button">
@@ -53,7 +59,7 @@ export default function Filters ({setSearchParams, setSortOrder}){
                 </div>
                 ) : null}
 
-            <Modal isOpen={openModal} setModalOpen={setOpenModal}>
+            <Modal isOpen={openModal} setModalOpen={setOpenModal} title="Filter" onClearFilters={clearFilter} onApplyFilters={applyFilter}>
                 <section className="filter">
                     <p className="filter-price-range">Price range</p>
                     <div className="sliders">
@@ -74,28 +80,8 @@ export default function Filters ({setSearchParams, setSortOrder}){
                             
                     
                     <p className="filter-amenities">Amenities</p>
-                    <ul className="list-amenities">
-                        {amenities.map((amenity_slug)=>{
-                            return (<li key={amenity_slug.amenity}>{amenity_slug.amenity}</li>)
-                        })}
-                    </ul>
-
-                
-                    <footer className="filter-buttons">
-                        <button
-                            className="clear-filter-button"
-                            >
-                            CLEAR ALL
-                        </button>
-                        <button
-                            className="apply-filter-button"
-                            variant="contained"
-                            color="primary"
-                            onClick={applyFilter}
-                            >
-                            FILTER
-                        </button>
-                    </footer>
+                    <Amenities onSelectAmenities={handleAmenitiesChange}/>
+                    
                 </section>
             </Modal>
         </>

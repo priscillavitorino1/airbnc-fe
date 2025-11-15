@@ -11,17 +11,19 @@ export default function Properties (){
     const [searchParams, setSearchParams] = useSearchParams('')
     const maxPrice = searchParams.get('maxPrice') || '500'
     const minPrice = searchParams.get('minPrice') || '0'
+    const amenities = searchParams.get('amenitites')
     const [isLoading, setIsLoading] = useState(false)
+    
 
     useEffect(()=>{
         setIsLoading(true)
         axios
-            .get('https://airbnc-q89r.onrender.com/api/properties',{params: {minPrice, maxPrice, order: sortOrder}})
+            .get('https://airbnc-q89r.onrender.com/api/properties',{params: {minPrice, maxPrice, order: sortOrder, amenities}})
             .then(({data})=>{
                 setProperties(data.properties)
                 setIsLoading(false)
               })
-        },[maxPrice, minPrice, sortOrder])
+        },[maxPrice, minPrice, sortOrder, amenities])
 
     return(
        <>

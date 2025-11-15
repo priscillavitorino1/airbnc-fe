@@ -11,9 +11,15 @@ function App() {
     <>
       <header>
         <Link to="/">
-          <img src="src/assets/logo-page.png" alt="logo header"/>
+          <h1 id="title-header">airbNC</h1>
         </Link>
-        <h1 id="title-header">airbNC</h1>
+          <div className='generic-search'>
+            <input type="search" className='generic-search-text' placeholder="Search"/>
+
+            <button type="button" id="generic-search-button" />
+          </div>
+
+      
         <p>Hello, username!</p>
       </header>
 
